@@ -30,7 +30,7 @@ static bool	is_validation_pid(char *argv1)
 	i = 0;
 	while (argv1[i])
 	{
-		if (argv1[i] < '0' || argv1[i] > '9')
+		if (!(argv1[i] >= '0' && argv1[i] <= '9'))
 			return (ERROR);
 		i++;
 	}
