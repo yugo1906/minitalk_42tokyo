@@ -17,9 +17,12 @@
 static bool	is_validation_argc_count(int argc)
 {
 	if (argc != 3)
-		return (true);
+	{
+		ft_putstr_fd("Error_minitalk\n", STDERR_FILENO);
+		return (ERROR);
+	}
 	else
-		return (false);
+		return (NOT_ERROR);
 }
 
 static bool	is_validation_pid(char *argv1)
@@ -31,12 +34,18 @@ static bool	is_validation_pid(char *argv1)
 	while (argv1[i])
 	{
 		if (!(argv1[i] >= '0' && argv1[i] <= '9'))
+		{
+			ft_putstr_fd("Error_minitalk\n", STDERR_FILENO);
 			return (ERROR);
+		}
 		i++;
 	}
 	pid = ft_atoi(argv1);
 	if (pid < PID_MIN || pid > PID_MAX)
+	{
+		ft_putstr_fd("Error_minitalk\n", STDERR_FILENO);
 		return (ERROR);
+	}
 	else
 		return (NOT_ERROR);
 }
