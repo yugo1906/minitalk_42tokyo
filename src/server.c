@@ -6,7 +6,7 @@
 /*   By: yughoshi <yughoshi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 23:32:20 by yughoshi          #+#    #+#             */
-/*   Updated: 2023/04/26 08:26:41 by yughoshi         ###   ########.fr       */
+/*   Updated: 2023/04/30 23:31:59 by yughoshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 int main(void)
 {
-	return (1);
+	pid_t pid;
+	pid = getpid();
+	ft_printf("%d\n", pid);
+
+	return (0);
 }
