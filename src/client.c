@@ -31,14 +31,14 @@ static bool	is_validation_pid(char *argv1)
 	while (argv1[i])
 	{
 		if (argv1[i] < '0' || argv1[i] > '9')
-			return (true);
+			return (ERROR);
 		i++;
 	}
 	pid = ft_atoi(argv1);
 	if (pid < PID_MIN || pid > PID_MAX)
-		return (true);
+		return (ERROR);
 	else
-		return (false);
+		return (NOT_ERROR);
 }
 
 int	main(int argc, char **argv)
