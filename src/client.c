@@ -6,7 +6,7 @@
 /*   By: yughoshi <yughoshi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 22:42:05 by yughoshi          #+#    #+#             */
-/*   Updated: 2023/05/03 00:36:20 by yughoshi         ###   ########.fr       */
+/*   Updated: 2023/05/03 00:38:29 by yughoshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	is_validation_pid(char *argv1)
 	{
 		if (!(argv1[i] >= '0' && argv1[i] <= '9'))
 		{
-			ft_putstr_fd("Error_minitalk\n", STDERR_FILENO);
+			ft_putstr_fd("Error: minitalk\n", STDERR_FILENO);
 			return (ERROR);
 		}
 		i++;
@@ -41,7 +41,7 @@ static bool	is_validation_pid(char *argv1)
 	pid = ft_atoi(argv1);
 	if (pid < PID_MIN || pid > PID_MAX)
 	{
-		ft_putstr_fd("Error_minitalk\n", STDERR_FILENO);
+		ft_putstr_fd("Error: minitalk\n", STDERR_FILENO);
 		return (ERROR);
 	}
 	else
