@@ -6,37 +6,36 @@
 /*   By: yughoshi <yughoshi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 23:32:20 by yughoshi          #+#    #+#             */
-/*   Updated: 2023/05/01 09:54:26 by yughoshi         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:26:17 by yughoshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
+//c = c << 1 : Shifts the bits of c to the left by 1. Repeat until 8 bits.
 static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
-	static int i = 0;
+	static int	counter_bit_receive = 0;
+	static char	c = 0;
+
 	(void)context;
-	(void)info;
-	// テスト：シグナルを受け取って出力できるか確認
 	if (signum == SIGUSR1)
+		c |= 1;
+	if (++counter_bit_receive == 8)
 	{
-		ft_printf("%d\n", i);
-		i++;
-		ft_printf("SIGUSR1\n");
-	}
-	else if (signum == SIGUSR2)
-	{
-		ft_printf("%d\n", i);
-		i++;
-		ft_printf("SIGUSR2\n");
+		counter_bit_receive = 0;
+		if (c == '\0')
+		{
+			kill(info->si_pid, SIGUSR1);
+			c = 0;
+			return ;
+		}
+		ft_putchar_fd(c, STDIN_FILENO);
+		c = 0;
 	}
 	else
-	{
-		ft_printf("Error_minitalk\n");
-	}
+		c = c << 1;
 }
-
-// function_sigemptyset: Initialize the signal mask so that it does not block on signals received while running the signal_handler.
 
 int	main(void)
 {
@@ -50,7 +49,7 @@ int	main(void)
 	sigemptyset(&s_sa.sa_mask);
 	sigaction(SIGUSR1, &s_sa, NULL);
 	sigaction(SIGUSR2, &s_sa, NULL);
-	while(1)
+	while (1)
 		pause();
 	return (0);
 }

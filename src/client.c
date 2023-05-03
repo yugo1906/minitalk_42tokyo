@@ -6,7 +6,7 @@
 /*   By: yughoshi <yughoshi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 22:42:05 by yughoshi          #+#    #+#             */
-/*   Updated: 2023/05/03 00:38:29 by yughoshi         ###   ########.fr       */
+/*   Updated: 2023/05/03 10:26:53 by yughoshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ static void	send_signal(int server_pid, char *str)
 		bit = 8;
 		while (bit-- > 0)
 		{
-			usleep(100);
 			if ((str[i] >> bit) & 1)
-				kill((pid_t)server_pid, SIGUSR2);
-			else
 				kill((pid_t)server_pid, SIGUSR1);
+			else
+				kill((pid_t)server_pid, SIGUSR2);
+			usleep(100);
 		}
 		i++;
 	}
@@ -84,14 +84,11 @@ int	main(int argc, char **argv)
 	struct sigaction	s_sa;
 	int					server_pid;
 
-	// 引数が2つではない場合はプログラム終了
 	if (is_validation_argc_count(argc))
 		exit(EXIT_FAILURE);
 	if (is_validation_pid(argv[1]))
 		exit(EXIT_FAILURE);
-	// シグナルハンドラーの設定_server.cからSIGUSR1を受け取ったらプロセスを終了
 	s_sa.sa_handler = signal_handler_usr1_end;
-	// シグナルハンドラーの設定を反映
 	sigaction(SIGUSR1, &s_sa, NULL);
 	server_pid = ft_atoi(argv[1]);
 	send_signal(server_pid, argv[2]);
