@@ -6,7 +6,7 @@
 /*   By: yughoshi <yughoshi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 23:32:20 by yughoshi          #+#    #+#             */
-/*   Updated: 2023/05/04 11:28:05 by yughoshi         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:16:27 by yughoshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
 	static int				counter_bit_receive = 0;
 	static unsigned char	output_char = 0;
+	int						kill_result;
 
 	(void)context;
 	if (signum == SIGUSR1)
@@ -26,7 +27,9 @@ static void	signal_handler(int signum, siginfo_t *info, void *context)
 		counter_bit_receive = 0;
 		if (output_char == '\0')
 		{
-			kill(info->si_pid, SIGUSR1);
+			kill_result = kill(info->si_pid, SIGUSR1);
+			if (!is_kill_successful(kill_result))
+				exit(EXIT_FAILURE);
 			output_char = 0;
 			return ;
 		}
@@ -46,7 +49,11 @@ int	main(void)
 	ft_printf("PID: %d\n", pid);
 	s_sa.sa_sigaction = signal_handler;
 	s_sa.sa_flags = SA_SIGINFO;
-	sigemptyset(&s_sa.sa_mask);
+	if (sigemptyset(&s_sa.sa_mask) == -1)
+	{
+		ft_putstr_fd("sigemptyset error\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
 	sigaction(SIGUSR1, &s_sa, NULL);
 	sigaction(SIGUSR2, &s_sa, NULL);
 	while (1)
