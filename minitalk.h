@@ -6,7 +6,7 @@
 /*   By: yughoshi <yughoshi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 22:41:58 by yughoshi          #+#    #+#             */
-/*   Updated: 2023/05/03 10:23:54 by yughoshi         ###   ########.fr       */
+/*   Updated: 2023/05/04 12:15:37 by yughoshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,9 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+bool	is_validation_argc_count(int argc);
+bool	is_validation_pid(char *argv1);
+bool	is_kill_successful(int kill_result);
 
 #endif

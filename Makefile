@@ -5,7 +5,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 LIBFT_DIR		=	./include_libft
 PRINTF_DIR	=	./include_ft_printf
 SRC_DIR			=	./src
-CLIENT_SRC	= client.c
+CLIENT_SRC	= client.c client_error_check_utils.c
 SERVER_SRC	= server.c
 CLIENT_SRCS	:= $(addprefix $(SRC_DIR)/, $(CLIENT_SRC))
 SERVER_SRCS	:= $(addprefix $(SRC_DIR)/, $(SERVER_SRC))
@@ -43,4 +43,4 @@ re: fclean all
 sanitize: CFLAGS += -g -fsanitize=address
 sanitize: re
 
-.PHONY: all clean fclean re sanitize
+.PHONY: all clean fclean re sanitize bonus
