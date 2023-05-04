@@ -6,7 +6,7 @@
 /*   By: yughoshi <yughoshi@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 23:32:20 by yughoshi          #+#    #+#             */
-/*   Updated: 2023/05/03 10:26:17 by yughoshi         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:28:05 by yughoshi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 //c = c << 1 : Shifts the bits of c to the left by 1. Repeat until 8 bits.
 static void	signal_handler(int signum, siginfo_t *info, void *context)
 {
-	static int	counter_bit_receive = 0;
-	static char	c = 0;
+	static int				counter_bit_receive = 0;
+	static unsigned char	output_char = 0;
 
 	(void)context;
 	if (signum == SIGUSR1)
-		c |= 1;
+		output_char |= 1;
 	if (++counter_bit_receive == 8)
 	{
 		counter_bit_receive = 0;
-		if (c == '\0')
+		if (output_char == '\0')
 		{
 			kill(info->si_pid, SIGUSR1);
-			c = 0;
+			output_char = 0;
 			return ;
 		}
-		ft_putchar_fd(c, STDIN_FILENO);
-		c = 0;
+		ft_putchar_fd(output_char, STDIN_FILENO);
+		output_char = 0;
 	}
 	else
-		c = c << 1;
+		output_char = output_char << 1;
 }
 
 int	main(void)
