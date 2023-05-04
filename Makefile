@@ -14,6 +14,8 @@ SERVER_OBJS	= ${SERVER_SRCS:%.c=%.o}
 
 all : $(NAME)
 
+bonus : $(NAME)
+
 $(CLIENT_NAME) : $(CLIENT_OBJS) minitalk.h
 	make -C $(LIBFT_DIR)
 	make -C $(PRINTF_DIR)
