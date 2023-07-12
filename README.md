@@ -21,5 +21,5 @@ https://github.com/yugo1906/minitalk_42tokyo/assets/89300571/312965cc-5f38-4c68-
 
 ## 雑感
 - ターミナルで「man signal」というコマンドをたたくと以下のようなsignalの説明が表示される 
-<img width="1417" alt="image" src="https://github.com/yugo1906/minitalk_42tokyo/assets/89300571/30a2880c-8d18-420b-a51e-752b0f27a8bd">
+![image](https://github.com/yugo1906/minitalk_42tokyo/assets/89300571/4b0bf179-3114-4f1b-bfd4-0582f1d1f93c)
 ※SIGUSR1とSIGUSR2はユーザーが動作を定義して利用するシグナルであり、本リポジトリにあるプログラムもSIGUSR1とSIGUSR2を活用している
