@@ -6,7 +6,7 @@
   - serverはclientから受け取った文字列を表示します（serverはsigintシグナルなどでプログラムを終了しない限りは、待機状態のままになります)
 
 ## デモ動画
-https://github.com/yugo1906/minitalk_42tokyo/assets/89300571/0ed969f2-e707-4d2a-855c-5f5d9c5012ae
+https://github.com/yugo1906/minitalk_42tokyo/assets/89300571/312965cc-5f38-4c68-a6c3-a6240f7f271f
 
 ■動作実行時のコマンドライン引数についての説明
 - serverのプログラム
